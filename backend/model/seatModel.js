@@ -5,6 +5,9 @@ const seatSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    type:{
+        type: mongoose.Schema.Types.ObjectId,
+    },
     flight:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Flight'

@@ -8,7 +8,6 @@ const {generateToken} = require('../utils/generateJWT')
 // @desc create a user
 // @route post /api/users
 // @access public after make that private when jwt setup
-
 const createUser = asyncHandler(async (req, res) => {
     const {firstname,lastname,password,email,dob,phone} = req.body;
     // check if all fields are filled
