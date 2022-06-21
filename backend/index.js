@@ -17,8 +17,6 @@ app.use(express.urlencoded({ extended: true }));
 // Routes
 app.use('/api/', require('./routes/authRoutes'))
 app.use('/api/users', require('./routes/userRoutes'))
-app.use('/api/seats', require('./routes/seatRoutes'))
-app.use('/api/seatTypes', require('./routes/seatTypeRoutes'))
 app.use('/api/reservations', require('./routes/reservationRoutes'))
 app.use('/api/flights', require('./routes/flightRoutes'))
 

@@ -7,9 +7,7 @@ const reservationSchema = new mongoose.Schema({
     flight:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Flight'},
-    seat:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Seat'},
+
 })
 
 

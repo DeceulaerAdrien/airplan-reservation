@@ -25,12 +25,6 @@ const flightSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    seats: [{
-        type: mongoose.Schema.Types.ObjectId,
-    }]
 })
 
-
-
-
-module.export = mongoose.model('Flight', flightSchema)
+module.exports = mongoose.model('Flight', flightSchema)

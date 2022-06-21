@@ -9,7 +9,7 @@ module.exports = asyncHandler(async(req, res, next) => {
         const decodedToken = jwt.verify(token,process.env.JWT_SECRET)
         // get user from token
         req.user = await User.findById(decodedToken.id).select('-password')
-        
+       
         next()
     }catch(error){
         res.status(401)
