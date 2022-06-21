@@ -8,7 +8,7 @@ const {generateToken} = require('../utils/generateJWT')
 // @desc create a user
 // @route post /api/users
 // @access public after make that private when jwt setup
-const createUser = asyncHandler(async (req, res) => {
+const register = asyncHandler(async (req, res) => {
     const {firstname,lastname,password,email,dob,phone} = req.body;
     // check if all fields are filled
     if(!firstname || !lastname || !password || !email || !dob || !phone){
@@ -33,6 +33,7 @@ const createUser = asyncHandler(async (req, res) => {
         email,
         phone,
         dob,
+        isAdmin: req.body.isAdmin ? req.body.isAdmin : false
         
     })
 
@@ -79,24 +80,31 @@ const login = asyncHandler(async (req, res) => {
     }
 
 })
+
 // @desc get all users
 // @route GET /api/users
-// @access public after make that private when jwt setup
+// @access private , admin 
 const getUsers = asyncHandler(async (req, res) => {
-    try{
+
+    const userID = await User.findById(req.user.id);
+    if (!userID) {
+        res.status(400)
+        throw new Error('user not found')
+    }
+    // if user admin then allow to get all users
+    if (userID.isAdmin) {
         const users = await User.find({})
         res.json(users)
-    }catch(error){
+    }else{
         res.status(400)
-        throw new Error('Not authenticated')
+        throw new Error("you are not allowed to get all users")
     }
-   
 })
 
 
 
 module.exports = {
     getUsers,
-    createUser,
+    register,
     login
 }

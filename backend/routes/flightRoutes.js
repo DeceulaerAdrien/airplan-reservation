@@ -1,20 +1,13 @@
 const express = require('express');
 const router = express.Router({mergeParams: true});
-const {createFlight} = require("../controller/flightController")
+const {createFlight,getAllFlights,getFlightById,updateFlight,deleteFlight} = require("../controller/flightController")
 const auth = require('../middleware/authMiddleware')
 
 
-router.post('/',createFlight)
 
-
-
-
-router.get('/',(req,res) => {
-    res.json({message:'Welcom to the flight routes'})
-})
-
-
-// router.get('/:id',)
-// router.put('/:id',)
-// router.delete('/:id',)
+router.get('/',auth, getAllFlights)
+router.post('/',auth,createFlight)
+router.get('/:id',auth,getFlightById)
+router.put('/:id',auth,updateFlight)
+router.delete('/:id',auth,deleteFlight)
 module.exports = router;
